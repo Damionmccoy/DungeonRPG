@@ -9,12 +9,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRB;
     private Animator playerAnim;
     private Vector3 changePos;
+    private Player player;
+
 
     // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
+        player = GetComponent<Player>();
+
     }
 
     // Update is called once per frame
@@ -24,15 +28,21 @@ public class PlayerMovement : MonoBehaviour
         changePos.x = Input.GetAxisRaw("Horizontal");
         changePos.y = Input.GetAxisRaw("Vertical");
 
-        if(changePos != Vector3.zero)
-        {
-            MovePlayer(changePos);
+
+        //if (player.GetPlayerState() != PlayerState.Attack)
+        //{
+            if (changePos != Vector3.zero)
+            {
+                player.UpdatePlayerState(PlayerState.Walk);
+                MovePlayer(changePos);
+            }
+            else
+            {
+                playerAnim.SetBool("moving", false);
+                player.UpdatePlayerState(PlayerState.Idle);
+            }
         }
-        else
-        {
-            playerAnim.SetBool("moving", false);
-        }
-    }
+    //}
 
 
     /// <summary>
@@ -41,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="_change">this is the vector3 used to decide how to move</param>
     void MovePlayer(Vector3 _change)
     {
+        _change.Normalize();
+
         Vector3 move = transform.position + _change * speed * Time.deltaTime;
         
         playerRB.MovePosition(move);
