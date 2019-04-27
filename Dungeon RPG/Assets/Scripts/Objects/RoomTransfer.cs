@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class RoomMove : MonoBehaviour
+public class RoomTransfer : MonoBehaviour
 {
     //Changes the camera x and y when transitioning rooms
-    public Vector2 cameraChange;                         
+    public Vector2 CameraMinChange;
+    public Vector2 CameraMaxChange;
     //Changes the player x and y when transitioning rooms
     public Vector2 playerChange;
     //This is the camera script attached to the main camera
@@ -40,11 +41,11 @@ public class RoomMove : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D _other)
     {
         //check if the player has entered the trigger
-        if (_other.CompareTag("Player"))
+        if (_other.CompareTag("Player")&& !_other.isTrigger)
         {
             //change the player and camera positions to that in the need room
-            cam.minPos += cameraChange;
-            cam.maxPos += cameraChange;
+            cam.minPos += CameraMinChange;
+            cam.maxPos += CameraMaxChange;
             _other.transform.position += new Vector3(playerChange.x, playerChange.y, _other.transform.position.z);
 
             //check if text is needed for the transition if so display the text for a time.

@@ -46,6 +46,9 @@ TagManager:
   - name: Signs
     uniqueID: 1014782121
     locked: 0
+  - name: Breakable
+    uniqueID: 2184129243
+    locked: 0
   - name: Player
     uniqueID: 4153432425
     locked: 0

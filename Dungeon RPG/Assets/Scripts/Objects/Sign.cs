@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Sign : MonoBehaviour
+public class Sign : Interactable
 {
     [SerializeField]
     GameObject DialogBox;
@@ -12,8 +12,8 @@ public class Sign : MonoBehaviour
     TextMeshProUGUI txtDisplayBox;
     [SerializeField]
     string txt2Display;
-    [SerializeField]
-    bool playerInRange;
+
+    //public Signal ContextOff;
 
     // Start is called before the first frame update
     void Start()
@@ -39,18 +39,12 @@ public class Sign : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D _other)
-    {
-        if (_other.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-    }
 
     private void OnTriggerExit2D(Collider2D _other)
     {
-        if (_other.CompareTag("Player"))
+        if (_other.CompareTag("Player") && !_other.isTrigger)
         {
+            ContextOn.Raise();
             playerInRange = false;
             txtDisplayBox.text = string.Empty;
             DialogBox.SetActive(false);
