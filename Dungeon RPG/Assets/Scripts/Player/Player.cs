@@ -6,10 +6,11 @@ using UnityEngine;
 
 public enum PlayerState
 {
-    Idle,
-    Walk,
-    Attack,
-    Interact
+    idle,
+    walk,
+    attack,
+    interact,
+    stagger
 }
 
 public class Player : MonoBehaviour
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curState = PlayerState.Idle;
+        curState = PlayerState.idle;
     }
 
 

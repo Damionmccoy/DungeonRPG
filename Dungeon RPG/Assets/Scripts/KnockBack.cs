@@ -6,33 +6,51 @@ public class KnockBack : MonoBehaviour
 {
     public float Thrust;
     public float KnockTime;
+    public float Damage;
+
     private void OnTriggerEnter2D(Collider2D _other)
     {
-        if (_other.gameObject.CompareTag("Enemy"))
+
+        if (_other.gameObject.CompareTag("Breakable") && gameObject.CompareTag("Player"))
         {
-            Rigidbody2D enemy = _other.GetComponent<Rigidbody2D>();
-            if(enemy != null)
+            _other.GetComponent<Pot>().SmashPot();
+        }
+
+
+        if (_other.gameObject.CompareTag("Enemy") || _other.gameObject.CompareTag("Player"))
+        {
+            Rigidbody2D hit = _other.GetComponent<Rigidbody2D>();
+
+            if(hit != null)
             {
+
+                Vector2 difference = hit.transform.position - transform.position;
+                difference = difference.normalized * Thrust;
+                hit.AddForce(difference, ForceMode2D.Impulse);
+
+                if (_other.gameObject.CompareTag("Enemy") && _other.isTrigger)
+                {
+                    _other.GetComponent<Enemy>().Knock(hit, KnockTime,Damage);
+                }
+                if (_other.gameObject.CompareTag("Player"))
+                {
+                    if(_other.GetComponent<Player>().GetPlayerState() != PlayerState.stagger)
+                    {
+                        _other.GetComponent<PlayerMovement>().Knock(KnockTime,Damage);
+                    }
+                    
+                }
                 
-                StartCoroutine(KnockCo(enemy));
             }
-            else
-            {
-                Debug.Log("no enemy");
-            }
+
         }
     }
 
+
     IEnumerator KnockCo(Rigidbody2D _enemy)
     {
-        _enemy.isKinematic = false;
-        Vector2 difference = _enemy.transform.position - transform.position;
-        difference = difference.normalized * Thrust;
-        _enemy.AddForce(difference, ForceMode2D.Impulse);
-        Debug.Log("before co");
         yield return new WaitForSeconds(KnockTime);
-        Debug.Log("after co");
         _enemy.velocity = Vector2.zero;
-        _enemy.isKinematic = true;
+        _enemy.GetComponent<Enemy>().CurrrentState = EnemyState.idle;
     }
 }

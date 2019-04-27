@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerAnim;
     private Vector3 changePos;
     private Player player;
-
+    public FloatValue CurrentHealth;
+    public Signal PlayerHealthSignal;
 
     // Start is called before the first frame update
     void Start()
@@ -29,17 +30,17 @@ public class PlayerMovement : MonoBehaviour
         changePos.y = Input.GetAxisRaw("Vertical");
 
 
-        //if (player.GetPlayerState() != PlayerState.Attack)
+        //if (player.GetPlayerState() != PlayerState.attack)
         //{
-            if (changePos != Vector3.zero)
+            if (changePos != Vector3.zero && (player.GetPlayerState() == PlayerState.walk || player.GetPlayerState() == PlayerState.idle))
             {
-                player.UpdatePlayerState(PlayerState.Walk);
+                player.UpdatePlayerState(PlayerState.walk);
                 MovePlayer(changePos);
             }
             else
             {
                 playerAnim.SetBool("moving", false);
-                player.UpdatePlayerState(PlayerState.Idle);
+                player.UpdatePlayerState(PlayerState.idle);
             }
         }
     //}
@@ -59,5 +60,27 @@ public class PlayerMovement : MonoBehaviour
         playerAnim.SetFloat("moveX", changePos.x);
         playerAnim.SetFloat("moveY", changePos.y);
         playerAnim.SetBool("moving", true);
+    }
+
+    public void Knock(float _knockTime,float _damage)
+    {
+        CurrentHealth.RuntimeValue -= _damage;
+        PlayerHealthSignal.Raise();
+        if (CurrentHealth.RuntimeValue > 0)
+        { 
+            StartCoroutine(KnockCo(_knockTime));
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator KnockCo( float _knockTime)
+    {
+        player.UpdatePlayerState(PlayerState.stagger);
+        yield return new WaitForSeconds(_knockTime);
+        playerRB.velocity = Vector2.zero;
+        player.UpdatePlayerState(PlayerState.idle);
     }
 }

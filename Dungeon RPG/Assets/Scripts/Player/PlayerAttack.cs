@@ -29,16 +29,18 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && weaponAnim != null)
+        if (Input.GetKeyDown(KeyCode.Space) && weaponAnim != null && player.GetPlayerState() != PlayerState.attack 
+            && player.GetPlayerState() != PlayerState.stagger)
         {
             Weapon.SetActive(true);
-            player.UpdatePlayerState(PlayerState.Attack);
+            player.UpdatePlayerState(PlayerState.attack);
             weaponAnim.SetTrigger("attack");
-        }
-        if(Input.GetKeyUp(KeyCode.Space) && weaponAnim != null)
-        {
-            player.UpdatePlayerState(PlayerState.Idle);
             StartCoroutine(AttackCo());
+        }
+        else if(Input.GetKeyUp(KeyCode.Space) && weaponAnim != null)
+        {
+            player.UpdatePlayerState(PlayerState.idle);
+            
         }
     }
 

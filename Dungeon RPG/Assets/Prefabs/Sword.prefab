@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 9147930017587443424}
   - component: {fileID: 9147930017587443425}
   - component: {fileID: 9147930017587443427}
-  - component: {fileID: 9147930017587443426}
+  - component: {fileID: 2166380242843221409}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8125, y: 0.8125}
   m_EdgeRadius: 0
---- !u!114 &9147930017587443426
+--- !u!114 &2166380242843221409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,6 +136,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 9147930017587443431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c897050ce8fb6db429b51dff885e497f, type: 3}
+  m_Script: {fileID: 11500000, guid: 44f9f500adc81634e9f7952446d7051b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Thrust: 5
+  KnockTime: 0.2
