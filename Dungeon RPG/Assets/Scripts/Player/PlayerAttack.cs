@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && weaponAnim != null && player.GetPlayerState() != PlayerState.attack 
-            && player.GetPlayerState() != PlayerState.stagger)
+            && player.GetPlayerState() != PlayerState.stagger && player.GetPlayerState() != PlayerState.interact )
         {
             Weapon.SetActive(true);
             player.UpdatePlayerState(PlayerState.attack);
@@ -39,15 +39,20 @@ public class PlayerAttack : MonoBehaviour
         }
         else if(Input.GetKeyUp(KeyCode.Space) && weaponAnim != null)
         {
-            player.UpdatePlayerState(PlayerState.idle);
-            
+
+            if (player.GetPlayerState() != PlayerState.interact)
+            {
+                player.UpdatePlayerState(PlayerState.idle);
+            }
         }
     }
+    
 
     IEnumerator AttackCo()
     {
         yield return new WaitForSeconds(.4f);
-        weaponAnim.ResetTrigger("attack");
         Weapon.SetActive(false);
+        weaponAnim.ResetTrigger("attack");
+
     }
 }

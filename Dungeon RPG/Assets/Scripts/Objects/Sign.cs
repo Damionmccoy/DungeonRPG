@@ -44,7 +44,7 @@ public class Sign : Interactable
     {
         if (_other.CompareTag("Player") && !_other.isTrigger)
         {
-            ContextOn.Raise();
+            Context.Raise();
             playerInRange = false;
             txtDisplayBox.text = string.Empty;
             DialogBox.SetActive(false);

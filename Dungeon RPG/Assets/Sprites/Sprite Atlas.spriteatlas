@@ -42,7 +42,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: a72bfc0bcdf774744a5b39345139ab4f, type: 3}
-    totalSpriteSurfaceArea: 1006486
+    totalSpriteSurfaceArea: 1006742
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -70,6 +70,7 @@ SpriteAtlas:
   - {fileID: 21300010, guid: 735a8e81044788940aeeefa38ec8603f, type: 3}
   - {fileID: 21300034, guid: 735a8e81044788940aeeefa38ec8603f, type: 3}
   - {fileID: 21300022, guid: 735a8e81044788940aeeefa38ec8603f, type: 3}
+  - {fileID: 21300000, guid: d1804e7392a2fae46b308718162ca1e2, type: 3}
   - {fileID: 21300000, guid: 80896416ebd181c4080afe21c63b2ad8, type: 3}
   - {fileID: 21300000, guid: 4c85ce662db630a409350b02c8c9a45e, type: 3}
   - {fileID: 21300000, guid: c8c4185999fbc2e499cf4bcd1ca893c0, type: 3}
@@ -1633,6 +1634,7 @@ SpriteAtlas:
   - wake1
   - wake3
   - wake2
+  - key
   - 9555189_orig
   - character
   - cave

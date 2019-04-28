@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public FloatValue CurrentHealth;
     public Signal PlayerHealthSignal;
     public VectorValue StartingPosition;
+    public Inventory PlayerInventory;
+    public SpriteRenderer receivedItemSprite;
+
 
 
     // Start is called before the first frame update
@@ -28,13 +31,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        changePos = Vector3.zero;
-        changePos.x = Input.GetAxisRaw("Horizontal");
-        changePos.y = Input.GetAxisRaw("Vertical");
+        //Is the player in an interaction
+        if (player.GetPlayerState() != PlayerState.interact)
+        {
+            changePos = Vector3.zero;
+            changePos.x = Input.GetAxisRaw("Horizontal");
+            changePos.y = Input.GetAxisRaw("Vertical");
 
 
-        //if (player.GetPlayerState() != PlayerState.attack)
-        //{
+            //if (player.GetPlayerState() != PlayerState.attack)
+            //{
             if (changePos != Vector3.zero && (player.GetPlayerState() == PlayerState.walk || player.GetPlayerState() == PlayerState.idle))
             {
                 player.UpdatePlayerState(PlayerState.walk);
@@ -45,8 +51,9 @@ public class PlayerMovement : MonoBehaviour
                 playerAnim.SetBool("moving", false);
                 player.UpdatePlayerState(PlayerState.idle);
             }
+            //}
         }
-    //}
+    }
 
 
     /// <summary>
@@ -76,6 +83,26 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    public void RaiseItem()
+    {
+        if (PlayerInventory.CurrentItem != null)
+        {
+            if (player.GetPlayerState() != PlayerState.interact)
+            {
+                playerAnim.SetBool("pickup item", true);
+                player.UpdatePlayerState(PlayerState.interact);
+                receivedItemSprite.sprite = PlayerInventory.CurrentItem.ItemSprite;
+            }
+            else
+            {
+                playerAnim.SetBool("pickup item", false);
+                player.UpdatePlayerState(PlayerState.idle);
+                receivedItemSprite.sprite = null;
+                PlayerInventory.CurrentItem = null;
+            }
         }
     }
 

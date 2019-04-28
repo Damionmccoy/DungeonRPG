@@ -6,7 +6,7 @@ public class Interactable : MonoBehaviour
 {
 
     public bool playerInRange;
-    public Signal ContextOn;
+    public Signal Context;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class Interactable : MonoBehaviour
     {
         if (_other.CompareTag("Player") && !_other.isTrigger)
         {
-            ContextOn.Raise();
+            Context.Raise();
             playerInRange = true;
         }
     }
@@ -33,7 +33,7 @@ public class Interactable : MonoBehaviour
     {
         if (_other.CompareTag("Player") && !_other.isTrigger)
         {
-            ContextOn.Raise();
+            Context.Raise();
             playerInRange = false;
         }
     }
