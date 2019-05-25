@@ -13,20 +13,46 @@ public enum EnemyState
 
 public class Enemy : MonoBehaviour
 {
-
-    public float BaseHealth;
+    [Header("Enemy Base",order =0)]
+    [Header("Base Values",order =1)]
+    public float RuntimeHealth;
     public string EnemyName;
     public int BaseAttack;
     public float BaseMoveSpeed;
+
+    [Header("Current State",order =1)]
     public EnemyState CurrrentState;
+    [Header("Defualt States",order = 0)]
     public FloatValue BaseMaxHealth;
+
+    [Header("Death Effects and signals")]
+    public GameObject DeathEffectObject;
+    public Signal roomSignal;
+    private Vector2 HomePosition;
+    public LootTable EnemyLoot;
 
 
     private void Awake()
     {
-        BaseHealth = BaseMaxHealth.InitialValue;
+        RuntimeHealth = BaseMaxHealth.InitialValue;
+        HomePosition = transform.position;
     }
 
+    private void OnEnable()
+    {
+        transform.position = HomePosition;
+        RuntimeHealth = BaseMaxHealth.InitialValue;
+        CurrrentState = EnemyState.idle;
+    }
+
+    private void DeathEffect()
+    {
+        if(DeathEffectObject != null)
+        {
+            GameObject effect = Instantiate(DeathEffectObject, transform.position, Quaternion.identity);
+            Destroy(effect, 1f);
+        }
+    }
 
     /// <summary>
     /// This is used for a knockback effect
@@ -69,10 +95,29 @@ public class Enemy : MonoBehaviour
 
     private void TakeDamage(float _damage)
     {
-        BaseHealth -= _damage;
-        if(BaseHealth <= 0)
+        RuntimeHealth -= _damage;
+
+        if(RuntimeHealth <= 0) //happens if the player is dead
         {
+            DeathEffect();
+            DropLoot();
+            if (roomSignal != null)
+            {
+                roomSignal.Raise();
+            }
             gameObject.SetActive(false);
+        }
+    }
+
+    private void DropLoot()
+    {
+        if(EnemyLoot != null)
+        {
+            Powerup current = EnemyLoot.GetLoot();
+            if(current != null)
+            {
+                Instantiate(current.gameObject, transform.position, Quaternion.identity);
+            }
         }
     }
 }

@@ -115,6 +115,39 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
+        type: 3}
+      propertyPath: SceneToLoad
+      value: HouseInterior
+      objectReference: {fileID: 0}
+    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
+        type: 3}
+      propertyPath: PlayerPosition.y
+      value: -4.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
+        type: 3}
+      propertyPath: StoredPlayerPosition
+      value: 
+      objectReference: {fileID: 11400000, guid: cf25703dba7cb2d47b3b4d4edb8053bc,
+        type: 2}
+    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
+        type: 3}
+      propertyPath: SceneTransitionOut
+      value: 
+      objectReference: {fileID: 8336596546028289353, guid: 9337ea47f793af641bd15252a5fd2917,
+        type: 3}
+    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
+        type: 3}
+      propertyPath: SceneTransitionIn
+      value: 
+      objectReference: {fileID: 55587693752796891, guid: 218c4ccfb68c6144d86b4dd1ea585543,
+        type: 3}
+    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
+        type: 3}
+      propertyPath: FadeWait
+      value: 0.33
+      objectReference: {fileID: 0}
     - target: {fileID: 542042134189183319, guid: e4c6a751039949a408926904ee34aecd,
         type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -149,39 +182,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
-        type: 3}
-      propertyPath: SceneToLoad
-      value: HouseInterior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
-        type: 3}
-      propertyPath: PlayerPosition.y
-      value: -4.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
-        type: 3}
-      propertyPath: StoredPlayerPosition
-      value: 
-      objectReference: {fileID: 11400000, guid: cf25703dba7cb2d47b3b4d4edb8053bc,
-        type: 2}
-    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
-        type: 3}
-      propertyPath: SceneTransitionOut
-      value: 
-      objectReference: {fileID: 8336596546028289353, guid: 9337ea47f793af641bd15252a5fd2917,
-        type: 3}
-    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
-        type: 3}
-      propertyPath: SceneTransitionIn
-      value: 
-      objectReference: {fileID: 55587693752796891, guid: 218c4ccfb68c6144d86b4dd1ea585543,
-        type: 3}
-    - target: {fileID: 3001369450658783495, guid: e4c6a751039949a408926904ee34aecd,
-        type: 3}
-      propertyPath: FadeWait
-      value: 0.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4c6a751039949a408926904ee34aecd, type: 3}
